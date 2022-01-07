@@ -357,3 +357,6 @@ console.log(employees.reduce((hasEnoughTerritories, employee) => {
 	}
 	return hasEnoughTerritories;
 }, false));
+
+title('15', 'Use find() to retrieve the last name of the employee with a specific employeeID');
+console.log(employees.find(m => m.employeeID === 5).lastName);
