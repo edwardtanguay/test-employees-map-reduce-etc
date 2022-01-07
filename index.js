@@ -349,3 +349,11 @@ console.log('Our employees have the following titles: ' + employees.reduce((titl
 	}
 	return titles;
 }, [] ).join(', '));
+
+title('14', 'Use reduce to return a boolean whether there is a an employee from the USA with more than 3 territories.');
+console.log(employees.reduce((hasEnoughTerritories, employee) => {
+	if (employee.address.country === 'USA' && employee.territoryIDs.length > 3) {
+		hasEnoughTerritories = true;	
+	}
+	return hasEnoughTerritories;
+}, false));
