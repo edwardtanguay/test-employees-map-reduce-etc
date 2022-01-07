@@ -267,3 +267,8 @@ console.log(employees.map(m => {
 
 title('5', 'same as 3 but as one-liner');
 console.log(employees.map(m => `${m.firstName} ${m.lastName} (${m.employeeID})`));
+
+title('6', "output an object: { total: 9, names: ['Andrew Fuller', 'Steven Buchanan', ...]}")
+
+
+title('7',"output an object of employees with the same territory: { sameTerritories: [222: 'Fuller, Buchanan', 333: 'Davolio, Leverling']}")
