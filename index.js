@@ -239,8 +239,8 @@ const employees = [
 	}
 ];
 
-// 1.
-// array witih firstname, lastname
+const title = (num, text) => console.log(`\n=== ${num}. ${text}`);
+title('1', 'array with firstname, lastname');
 console.log(employees.map(employee => {
 	return {
 		lname: employee.lastName,
@@ -249,9 +249,7 @@ console.log(employees.map(employee => {
 }));
 
 
-// 2.
-// lname
-// fname
+title('2', 'array with lname, fname');
 console.log(employees.map(employee => {
 	return {
 		lname: employee.lastName,
@@ -259,8 +257,13 @@ console.log(employees.map(employee => {
 	};
 }));
 
-// 3. 
-// array with string: "Andrew Fuller (2)"
+title('3', 'example 2 as one-liner (careful! you are returning an object!)');
+console.log(employees.map(employee => ({lname: employee.lastName,fname: employee.firstName})));
+
+title('4', 'array with string: "Andrew Fuller (2)"');
 console.log(employees.map(m => {
 	return `${m.firstName} ${m.lastName} (${m.employeeID})`;
 }));
+
+title('5', 'same as 3 but as one-liner');
+console.log(employees.map(m => `${m.firstName} ${m.lastName} (${m.employeeID})`));
