@@ -342,13 +342,10 @@ console.log(employees.reduce((title, employee, index, arr) => {
 
 title('13', 'use reduce to create a string of all unique titles: "Our employees have the following titles: "Vice President Sales", "Sales Manager", ...');
 const usedTitles = [];
-console.log(employees.reduce((sentence, employee, index, arr) => {
+console.log('Our employees have the following titles: ' + employees.reduce((titles, employee, index, arr) => {
 	if (!usedTitles.includes(employee.title)) {
-		sentence += `"${employee.title}"`;
-		if (index !== arr.length - 1) {
-			sentence += ', ';
-		}
+		titles.push(employee.title);
 		usedTitles.push(employee.title);
 	}
-	return sentence;
-}, 'Our employees have the following titles: '));
+	return titles;
+}, [] ).join(', '));
