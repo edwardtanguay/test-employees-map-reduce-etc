@@ -239,4 +239,22 @@ const employees = [
 	}
 ];
 
-// const names = 
+// 1.
+// array witih firstname, lastname
+console.log(employees.map(employee => {
+	return {
+		lname: employee.lastName,
+		fname: employee.firstName
+	};
+}));
+
+
+// 2.
+// lname
+// fname
+console.log(employees.map(employee => {
+	return {
+		lname: employee.lastName,
+		fname: employee.firstName
+	};
+}));
