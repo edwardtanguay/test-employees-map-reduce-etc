@@ -322,3 +322,33 @@ console.log(employees.filter(employee => {
 		return employee.lastName;
 	}
 }).map(m => m.lastName));
+
+title('11', 'use reduce to count all from UK: e.g. 4');
+console.log(employees.reduce((total, employee) => {
+	if (employee.address.country === 'UK') {
+		total++;
+	}
+	return total;
+}, 0));
+
+title('12', 'use reduce to create a string of all titles: "Our employees have the following titles: "Vice President Sales", "Sales Manager", ...');
+console.log(employees.reduce((title, employee, index, arr) => {
+	title += `"${employee.title}"`;
+	if (index !== arr.length - 1) {
+		title += ', ';
+	}
+	return title;
+}, 'Our employees have the following titles: '));
+
+title('13', 'use reduce to create a string of all unique titles: "Our employees have the following titles: "Vice President Sales", "Sales Manager", ...');
+const usedTitles = [];
+console.log(employees.reduce((sentence, employee, index, arr) => {
+	if (!usedTitles.includes(employee.title)) {
+		sentence += `"${employee.title}"`;
+		if (index !== arr.length - 1) {
+			sentence += ', ';
+		}
+		usedTitles.push(employee.title);
+	}
+	return sentence;
+}, 'Our employees have the following titles: '));
