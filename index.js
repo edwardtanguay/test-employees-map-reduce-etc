@@ -258,3 +258,9 @@ console.log(employees.map(employee => {
 		fname: employee.firstName
 	};
 }));
+
+// 3. 
+// array with string: "Andrew Fuller (2)"
+console.log(employees.map(m => {
+	return `${m.firstName} ${m.lastName} (${m.employeeID})`;
+}));
