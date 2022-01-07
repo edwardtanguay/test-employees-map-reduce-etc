@@ -18,7 +18,7 @@ const employees = [
 		notes: "Andrew received his BTS commercial in 1974 and a Ph.D. in international marketing from the University of Dallas in 1981.  He is fluent in French and Italian and reads German.  He joined the company as a sales representative was promoted to sales manager",
 		reportsTo: "NULL",
 		territoryIDs: [
-			1730,
+			222,
 			1833,
 			2116,
 			2139,
@@ -49,9 +49,9 @@ const employees = [
 			2903,
 			7960,
 			8837,
-			10019,
+			222,
 			10038,
-			11747,
+			333,
 			14450
 		]
 	},
@@ -98,7 +98,7 @@ const employees = [
 		reportsTo: 2,
 		territoryIDs: [
 			30346,
-			31406,
+			222,
 			32859,
 			33607
 		]
@@ -124,7 +124,7 @@ const employees = [
 		territoryIDs: [
 			20852,
 			27403,
-			27511
+			333
 		]
 	},
 	{
@@ -148,9 +148,9 @@ const employees = [
 		territoryIDs: [
 			85014,
 			85251,
-			98004,
+			333,
 			98104,
-			98052
+			222
 		]
 	},
 	{
@@ -175,7 +175,7 @@ const employees = [
 			60601,
 			80202,
 			80909,
-			90405,
+			19428,
 			94025,
 			94105,
 			95008,
@@ -258,7 +258,7 @@ console.log(employees.map(employee => {
 }));
 
 title('3', 'example 2 as one-liner (careful! you are returning an object!)');
-console.log(employees.map(employee => ({lname: employee.lastName,fname: employee.firstName})));
+console.log(employees.map(employee => ({ lname: employee.lastName, fname: employee.firstName })));
 
 title('4', 'array with string: "Andrew Fuller (2)"');
 console.log(employees.map(m => {
@@ -273,7 +273,52 @@ console.log(employees.reduce((obj, employee) => {
 	obj.total++;
 	obj.names.push(`${employee.firstName} ${employee.lastName}`);
 	return obj;
-}, { total: 0, names: []}));
+}, { total: 0, names: [] }));
+
+title('7', "same as 6 but with a star if employee is from UK: { total: 9, names: ['Andrew Fuller', '*Steven Buchanan', ...]}")
+console.log(employees.reduce((obj, employee) => {
+	obj.total++;
+	if (employee.address.country === 'UK') {
+		obj.names.push(`*${employee.firstName} ${employee.lastName}`);
+	} else {
+		obj.names.push(`${employee.firstName} ${employee.lastName}`);
+	}
+	return obj;
+}, { total: 0, names: [] }));
 
 
-title('7',"output an object of employees with the same territory: { sameTerritories: [222: 'Fuller, Buchanan', 333: 'Davolio, Leverling']}")
+title('8', "output an object of employees with the same territory: {'222': [ 'Fuller', 'Buchanan', 'Leverling', 'Suyama' ], '333': [ 'Buchanan', 'Peacock', 'Suyama' ]}");
+console.log(employees.reduce((obj, emp1, index, arr) => {
+	emp1.territoryIDs.forEach(territoryID => {
+		arr.forEach(emp2 => {
+			// don't compare to yourself
+			if (emp1.employeeID !== emp2.employeeID) {
+				if (emp2.territoryIDs.includes(territoryID)) {
+					if (!obj[territoryID]) {
+						obj[territoryID] = [emp1.lastName, emp2.lastName];
+					} else {
+						if (!obj[territoryID].includes(emp1.lastName)) {
+							obj[territoryID].push(emp1.lastName);
+						}
+					}
+				}
+			}
+		})
+	})
+	return obj;
+}, {}));
+
+title('9', "use reduce to return only those from UK as array: ['Buchanan', 'Suyama', ...]");
+console.log(employees.reduce((arr, employee) => {
+	if (employee.address.country === 'UK') {
+		arr.push(employee.lastName);
+	}
+	return arr;
+}, []));
+
+title('10', "use a filter to return only those from UK as array: ['Buchanan', 'Suyama', ...]");
+console.log(employees.filter(employee => {
+	if (employee.address.country === 'UK') {
+		return employee.lastName;
+	}
+}).map(m => m.lastName));
